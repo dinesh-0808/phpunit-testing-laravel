@@ -23,5 +23,3 @@ $email = ['enunomaduro@gmail.com', 'other@example.com'];
 it('has emails', function (string $email) {
     expect($email)->not->toBeEmpty();
 })->with($email);
-
-it('dinehs')->todo();

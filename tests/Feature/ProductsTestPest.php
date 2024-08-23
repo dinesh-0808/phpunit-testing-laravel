@@ -141,12 +141,28 @@ test('api returns products list', function () {
     $product = Product::factory()->create();
     $admin = createUser(isAdmin: true);
 
-    $response = $this->actingAs($admin)->getJson('/products/api');
+    $response = $this->actingAs($admin)->getJson('/product/api');
 
     $response->assertJsonFragment($product->toArray());
+
+
 });
 
 function createUser(bool $isAdmin = false): User
 {
     return User::factory()->create(['is_admin' => $isAdmin]);
 }
+
+
+it('adds numbers correctly', function ($a, $b, $expected) {
+    expect($a + $b)->toBe($expected);
+})->with([
+    [1, 1, 2],
+    [2, 2, 4],
+    [3, 3, 6],
+]);
+
+it('can add numbers', function () {
+    $sum = 1 + 1;
+    expect($sum)->toBe(2);
+});

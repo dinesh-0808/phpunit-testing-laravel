@@ -12,11 +12,12 @@ class ProductsTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
-
+    private $data;
     protected function setUp(): void
     {
         parent::setUp();
 
+        $this->data = ["dinesh"];
         $this->user = $this->createUser();
     }
 
@@ -147,7 +148,7 @@ class ProductsTest extends TestCase
     {
         $product = Product::factory()->create();
         $admin = $this->createUser(isAdmin: true);
-        $response = $this->actingAs($admin)->getJson('/products/api');
+        $response = $this->actingAs($admin)->getJson('/product/api');
         $response->assertJsonFragment($product->toArray());
     }
 
@@ -156,4 +157,21 @@ class ProductsTest extends TestCase
         return User::factory()->create(['is_admin'=>$isAdmin]);
 
     }
+
+
+    protected function tearDown(): void
+    {
+        // Code to run after each test
+        $this->data = null;
+    }
+
+    public function test_data_is_not_empty()
+    {
+        $this->assertNotEmpty($this->data);
+    }
+
+
 }
+
+
+
